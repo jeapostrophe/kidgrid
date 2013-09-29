@@ -124,4 +124,5 @@
     (activity 5.0 ??? 5 "Math > Subtraction [10x10] [written]")
     (activity 5.0 ??? 3 "Science > Basic reading (w/ parent)")
     (activity 5.0 ??? 3 "History > Basic reading (w/ parent)")
-    (activity 5.0 ??? 5 "Literature > Basic reading (w/ parent)"))))
+    (activity 5.0 ??? 5 "Literature > Basic reading (w/ parent)")
+    (activity 5.0 ??? 5 "Composition > Sentences [written]"))))
