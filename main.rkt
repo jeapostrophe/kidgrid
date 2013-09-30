@@ -64,10 +64,6 @@
           ([id "body"])
           (table
            ([id "activities"])
-           (thead
-            (tr
-             ,@(for/list ([u (in-list users)])
-                 `(th ,(user-name u)))))
            (tbody
             ,@(append*
                (for/list ([a (in-list live-activities)])
