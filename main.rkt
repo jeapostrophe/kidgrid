@@ -109,6 +109,7 @@
     (activity 3.0 3.5 5 "Reading > Letters")
     (activity 3.0 3.5 5 "Math > Numbers")
     (activity 3.0 ??? 1 "Life Skills")
+    (activity 3.0 3.5 5 "Reading > Learning Books")
     (activity 3.5 4.0 5 "Reading > Letters [written]")
     (activity 3.5 4.0 5 "Math > Numbers [written]")
     (activity 3.5 ??? 5 "Reading > Blends")
