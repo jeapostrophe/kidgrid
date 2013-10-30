@@ -100,11 +100,9 @@
   (go
    (list
     (user "Frog"
-          5.0 #;
-          (date 2008 09 09))
+          5.0)
     (user "Peach"
-          3.0 #;
-          (date 2010 08 23)))
+          3.0))
    (list
     (activity 3.0 3.5 5 "Reading > Letters")
     (activity 3.0 3.5 5 "Math > Numbers")
