@@ -28,6 +28,11 @@
        (<= (user-age u)
            (activity-end-age a))))
 
+(define (add-spacing l)
+  (if (= (length l) 5)
+    l
+    (add-between l `(td ([class "gapday"]) nbsp))))
+
 (define-runtime-path source-dir ".")
 
 (define (go output-p users activities)
@@ -70,12 +75,13 @@
                        (if (activity-live? a u)
                          `(td
                            (table ([id "days"])
-                                  (tr ,@(for/list ([i (in-range (activity-freq a))])
-                                          `(td
-                                            (table ([id "day"])
-                                                   (tr
-                                                    ,@(for/list ([j (in-range 3)])
-                                                        `(td nbsp)))))))))
+                                  (tr ,@(add-spacing
+                                         (for/list ([i (in-range (activity-freq a))])
+                                           `(td
+                                             (table ([id "day"])
+                                                    (tr
+                                                     ,@(for/list ([j (in-range 3)])
+                                                         `(td nbsp))))))))))
                          `(td ([class "blank"]) nbsp))))))))))
         (div ([id "footer"])
              ,@(for/list ([i (in-range 21)])
