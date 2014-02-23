@@ -1,6 +1,7 @@
 #lang racket/base
 (require racket/runtime-path
          racket/list
+         racket/function
          xml
          (prefix-in d: racket/date))
 
@@ -25,8 +26,14 @@
 (define (activity-live? a u)
   (and (<= (activity-start-age a)
            (user-age u))
-       (<= (user-age u)
-           (activity-end-age a))))
+       (< (user-age u)
+          (activity-end-age a))))
+
+(define (activity-died? u a)
+  (and (<= (activity-start-age a)
+           (user-age u))
+       (not (< (user-age u)
+               (activity-end-age a)))))
 
 (define (add-spacing l)
   (if (= (length l) 5)
@@ -38,7 +45,7 @@
 (define (go output-p users activities)
   (define live-activities
     (filter (λ (a)
-              (ormap (λ (u) (activity-live? a u))
+              (ormap (curry activity-live? a)
                      users))
             activities))
   (define max-freq
@@ -64,13 +71,22 @@
          (table
           ([id "activities"])
           (tbody
+           (tr ([class "boxes"])
+               ,@(for/list ([u (in-list users)])
+                   (define died-as
+                     (filter (curry activity-died? u) activities))
+                   `(td ([class "died"])
+                     (table
+                      (tr
+                       (td ,(user-name u))
+                       (td ,@(map (λ (a) `(span ,(activity-name a))) died-as)))))))
            ,@(append*
               (for/list ([a (in-list live-activities)])
                 (list
                  `(tr ([class "activity"])
                       (td ([colspan ,(number->string (length users))])
                           ,(activity-name a)))
-                 `(tr
+                 `(tr ([class "boxes"])
                    ,@(for/list ([u (in-list users)])
                        (if (activity-live? a u)
                          `(td
@@ -89,7 +105,9 @@
 
   (with-output-to-file output-p
     #:exists 'replace
-    (λ () (write-xexpr xe))))
+    (λ () 
+      (displayln "<!DOCTYPE html>")
+      (write-xexpr xe))))
 
 (module+ main
   (require racket/runtime-path)
@@ -102,7 +120,7 @@
     (user "Frog"
           5.0)
     (user "Peach"
-          3.25))
+          3.5))
    (list
     (activity 3.0 3.5 5 "Reading > Letters")
     (activity 3.0 3.5 5 "Math > Numbers")
@@ -115,7 +133,7 @@
     (activity 3.5 ??? 5 "Reading > Blends")
     (activity 4.0 ??? 3 "Music")
     (activity 4.0 ??? 5 "Reading > Words [written]")
-    (activity 4.0 ??? 5 "Math > Addition [10x10] [written]")
+    (activity 4.0 5.0 5 "Math > Addition [10x10] [written]")
     (activity 4.5 ??? 5 "Reading > Beginning reader books (to parent)")
     (activity 5.0 ??? 5 "Math > Subtraction [10x10] [written]")
     (activity 5.0 ??? 3 "Science > Basic reading (w/ parent)")

@@ -5,37 +5,40 @@ html, body {
     height: 100%;
 }
 
+body {
+    font-size: 8pt;
+}
+
 #container {
-/*    min-height: 100%;
-    position: relative; */
 }
 
 #header {
 }
 
 #body {
-/*    padding-bottom: 1em; */
 }
 
 #footer {
-/*    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    height: 1em; */
-
     padding-top: 1em;
     text-align: center;
 }
 
 h3 {
     text-align: center;
-    font-size: 75%;
     font-style: italic;
 }
 
 table#activities {
     margin-left: auto;
     margin-right: auto;
+}
+
+tr.boxes > td {
+    width: 50%;
+}
+
+table#days {
+    width: 100%;
 }
 
 table#days td {
@@ -45,12 +48,35 @@ table#days td {
 
 table#days td.gapday {
     border: 0px;
-    width: 66px;
+    width: 20%;
+}
+
+td.died {
+    vertical-align: top;
+}
+
+td.died table {
+    float: left;
+}
+
+td.died table tr {
+    vertical-align: top;
+}
+
+td.died table tr td span {
+    vertical-align: middle;
+    font-size: 75%;
+    display: inline-block;
+    margin-right: 1em;
+    border: dotted 1px;
 }
 
 tr.activity td {
     text-align: center;
-    font-size: 75%;
+}
+
+table#day {
+    width: 100%;
 }
 
 table#day td {
@@ -58,11 +84,11 @@ table#day td {
     border: 1px solid black;
 }
 table#day td:nth-child(1) {
-    width: 10px;
+    width: 20%;
 }
 table#day td:nth-child(2) {
-    width: 16px;
+    width: 30%;
 }
 table#day td:nth-child(3) {
-    width: 24px;
+    width: 50%;
 }
