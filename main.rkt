@@ -140,7 +140,7 @@
 
 (module+ main
   (require racket/runtime-path)
-  (define-runtime-path index.html "static/index.html")
+  (define-runtime-path index.tex "static/index.tex")
 
   (define current-id
     (make-parameter (λ () (gensym))))
@@ -163,39 +163,52 @@
     (parameterize ([current-never-died #t])
       (list a ...)))
 
-
   (define u:frog
     (user "Frog"
-          5.5))
+          6.0))
   (define u:peach
     (user "Peach"
-          3.5))
+          4.0))
+  (define u:hazel
+    (user "Hazel"
+          2.0))
 
   (define ??? 18.0)
+  ;; xxx specify how long/how many of each needs to be done at various
+  ;; ages and increase jack's limits to at least 5 words in sentences
+  ;; and reading 15 sentences rather than 10
+
+  ;; xxx ensure that tasks have lists in anki
+
+  ;; xxx generate multi-digit addition cards according to multi-digit
+  ;; addition (75% carrying, 50% 3x3 (last), 25% 3x2, 25% 2x2)
+
+  ;; xxx convert to latex output?
   (go
    index.html
    (list
     u:frog
-    u:peach)
+    u:peach
+    u:hazel)
    (flatten
     (list
-     (*activity 3.0 3.5 5 "Reading > Letters")
+     (*activity 2.0 3.5 5 "Reading > Letters")
      (*activity 3.0 3.5 5 "Math > Numbers")
      ;; (*activity 3.0 ??? 1 "Life Skills")
      ;; (*activity 3.0 3.5 3 "Reading > Learning Books")
      (never-died
       (*activity 3.0 3.5 3 "Writing > Tracing"))
-     (*activity 3.25 ??? 3 "Computer > Keyboard & Mouse")
+     (*activity 3.25 6.0 3 "Computer > Keyboard & Mouse")
      (except-user u:frog
-                  (*activity 3.5 4.0 5 "Reading > Letters [written]")
-                  (*activity 3.5 4.0 5 "Math > Numbers [written]"))
+                  (*activity 3.5 4.5 5 "Reading > Letters [written]")
+                  (*activity 3.5 4.5 5 "Math > Numbers [written]"))
      (*activity 3.5 5.5 5 "Reading > Blends")
      (*activity 4.0 ??? 5 "Reading > Words [written]")
      (*activity 4.0 5.0 5 "Math > Addition [10x10] [written]")
      (meta-activity
       (*activity 4.5 5.5 5 "Reading > Beginning reader books (to parent) [5s]")
       (*activity 5.5 ??? 5 "Reading > Beginning reader books (to parent) [10s]"))
-     (*activity 5.0 ??? 5 "Math > Subtraction [10x10] [written]")
+     (*activity 5.0 6.0 5 "Math > Subtraction [10x10] [written]")
      (meta-activity
       (*activity 5.0 5.5 3 "Science > Basic reading (w/ parent)")
       (*activity 5.5 ??? 5 "Science > Basic reading (w/ parent)"))
@@ -205,4 +218,10 @@
      (*activity 5.0 ??? 5 "Literature > Basic reading (w/ parent)")
      (*activity 5.0 ??? 5 "Composition > Sentences [written]")
      (*activity 5.5 ??? 5 "Math > Addition [10x10] [memory]")
-     (*activity 6.0 ??? 3 "Music")))))
+     (*activity 5.5 ??? 5 "Math > Counting")
+     (*activity 6.0 ??? 5 "Writing > Words [spelled]")
+     (*activity 6.0 ??? 5 "Math > Subtraction [10x10] [memory]")
+     (*activity 6.0 ??? 5 "Math > Multi-Digit Addition")
+     (*activity 6.0 ??? 6 "Piano")
+     (*activity 6.0 ??? 5 "Computer > Typing")
+     (*activity 6.5 ??? 5 "Math > Multiplication [10x10] [written]")))))
