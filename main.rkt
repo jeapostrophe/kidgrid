@@ -150,10 +150,6 @@
           2.0))
 
   (define ??? 18.0)
-  ;; xxx ensure that tasks have lists in anki
-
-  ;; xxx generate multi-digit addition cards according to multi-digit
-  ;; addition (75% carrying, 50% 3x3 (last), 25% 3x2, 25% 2x2)
   (go
    index.tex
    (list
