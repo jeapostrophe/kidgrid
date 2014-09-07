@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\usepackage{fancybox}
+
+\usepackage[landscape, top=1.5cm, bottom=1.5cm, left=0.75cm, right=0.75cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\chead{Study Schedule for Week of: \hspace{0.5in}/\hspace{0.5in}/\hspace{0.5in}}
+\cfoot{0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+  24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+47 48 49 50}
+\renewcommand{\headrulewidth}{0pt}
+
+\usepackage{multicol}
+
+\newenvironment{user}
+{ \noindent\begin{minipage}[t][\textheight][t]{0.33\textwidth} }
+{ \end{minipage} \vfill }
+
+\newcommand{\name}[1]{\begin{center}#1\end{center}}
+
+\newenvironment{died}
+{ \noindent\begin{minipage}[t][0.1\textheight][t]{\textwidth} }
+{ \end{minipage} }
+
+\newcommand{\activitybox}[1]{\frame{\footnotesize\strut#1}\hspace{0.05in}}
+
+\newcommand{\activitylabel}[1]{\noindent {\footnotesize\strut #1} \\ }
+
+\newenvironment{activitydays}
+{ \vspace{.05in} }
+{ \\ }
+
+\newcommand{\activityday}[1]{\frame{\strut\hspace{.24in}}\frame{\strut\hspace{.36in}}\hspace{.05in}}
+
+\begin{document}
+\begin{multicols}{3}
+\input{index.tex}
+\end{multicols}
+\end{document}

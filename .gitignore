@@ -1,2 +1,6 @@
 compiled
-/static/index.html
+/index.tex
+*.aux
+*.dvi
+*.log
+*.pdf
