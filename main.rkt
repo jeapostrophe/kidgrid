@@ -88,8 +88,17 @@
           (partition
            activity-never-died?
            still-still-died-as))
+        (define seen? (make-hasheq))
+        (define s4-died-as
+          (reverse 
+           (filter (λ (a)
+                     (define i (activity-id a))
+                     (if (hash-has-key? seen? i)
+                       #f
+                       (hash-set! seen? i #t)))
+                   (reverse still-still-still-died-as))))
         (define final-died-as
-          still-still-still-died-as)
+          s4-died-as)
         (eprintf "~a: Ignored ~v\n"
                  (user-name u)
                  (map activity-name
@@ -193,7 +202,7 @@
      (*activity 5.5 ??? 5 "Math > Addition [10x10] [memory] [x10]")
      (*activity 5.5 ??? 5 "Math > Counting [x5]")
      (*activity 6.0 ??? 5 "Writing > Words [spelled] [x10]")
-     (*activity 6.0 ??? 5 "Math > Subtraction [10x10] [memory] [x10]")
+     (*activity 6.0 ??? 5 "Math > Subtraction [10x10] [memory] [x5]")
      (*activity 6.0 ??? 5 "Math > Multi-Digit Addition [x5]")
      (*activity 6.0 ??? 6 "Piano")
      (*activity 6.0 ??? 5 "Computer > Typing")
