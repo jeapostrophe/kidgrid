@@ -24,10 +24,10 @@
 ;; xxx Not the same computation humans normally use
 (define (user-age u)
   (if (date? (user-bday u))
-    (/ (- (current-seconds)
-          (date->seconds (user-bday u)))
-       (* 60 60 24 365))
-    (user-bday u)))
+      (/ (- (current-seconds)
+            (date->seconds (user-bday u)))
+         (* 60 60 24 365))
+      (user-bday u)))
 
 (define (list-max l)
   (apply max l))
@@ -46,8 +46,8 @@
 
 (define (add-spacing l)
   (if (= (length l) 5)
-    l
-    (add-between l `(td ([class "gapday"]) nbsp))))
+      l
+      (add-between l `(td ([class "gapday"]) nbsp))))
 
 (define-runtime-path source-dir ".")
 
@@ -90,12 +90,12 @@
            still-still-died-as))
         (define seen? (make-hasheq))
         (define s4-died-as
-          (reverse 
+          (reverse
            (filter (λ (a)
                      (define i (activity-id a))
                      (if (hash-has-key? seen? i)
-                       #f
-                       (hash-set! seen? i #t)))
+                         #f
+                         (hash-set! seen? i #t)))
                    (reverse still-still-still-died-as))))
         (define final-died-as
           s4-died-as)
@@ -150,13 +150,13 @@
 
   (define u:frog
     (user "Frog"
-          6.0))
+          8.0))
   (define u:peach
     (user "Peach"
-          4.0))
+          6.5))
   (define u:hazel
     (user "Hazel"
-          2.0))
+          4.0))
 
   (define ??? 18.0)
   (go
@@ -168,12 +168,14 @@
    (flatten
     (list
      (*activity 2.0 3.5 5 "Reading > Letters [x10]")
-     (*activity 3.0 3.5 5 "Math > Numbers [x5]")
+     (*activity 2.0 3.5 5 "Math > Numbers [x5]")
      ;; (*activity 3.0 ??? 1 "Life Skills")
      ;; (*activity 3.0 3.5 3 "Reading > Learning Books")
      (never-died
       (*activity 3.0 3.5 3 "Writing > Tracing"))
-     (*activity 3.25 6.0 3 "Computer > Keyboard & Mouse")
+     (meta-activity
+      (*activity 3.25 4.25 3 "Computer > Keyboard & Mouse")
+      (*activity 4.25 ??? 5 "Computer > Typing"))
      (except-user u:frog
                   (*activity 3.5 4.5 5 "Reading > Letters [written] [x10]")
                   (*activity 3.5 4.5 5 "Math > Numbers [written] [x5]"))
@@ -181,29 +183,48 @@
       (*activity 3.5 4.0 5 "Reading > Blends [x10]")
       (*activity 4.0 5.5 5 "Reading > Blends [x25]"))
      (meta-activity
-      (*activity 4.0 4.5 5 "Reading > Words [written] [x5]")
-      (*activity 4.5 ??? 5 "Reading > Words [written] [x10]"))
+      (*activity 4.0 4.5 5 "Reading > Words [r/w] [x5]")
+      (*activity 4.5 6.0 5 "Reading > Words [r/w] [x10]")
+      (*activity 6.0 6.5 5 "Reading > Words [r/w] [x10]")
+      (*activity 6.5 ??? 5 "Reading > Words [r] [x20]"))
      (meta-activity
       (*activity 4.0 4.5 5 "Math > Addition [10x10] [written] [x5]")
       (*activity 4.5 5.0 5 "Math > Addition [10x10] [written] [x10]"))
      (meta-activity
       (*activity 4.5 5.5 5 "Reading > Beginning reader books (to parent) [5s]")
       (*activity 5.5 6.0 5 "Reading > Beginning reader books (to parent) [10s]")
-      (*activity 6.0 ??? 5 "Reading > Beginning reader books (to parent) [15s]"))
+      (*activity 6.0 6.5 5 "Reading > Beginning reader books (to parent) [15s]")
+      (*activity 6.5 ??? 5 "Reading > Beginning reader books (to parent) [1u]"))
+     (meta-activity
+      (*activity 4.5 6.5 5 "Math > Khan Academy [x5]")
+      (*activity 6.5 6.75 5 "Math > Khan Academy [x10]")
+      (*activity 6.75 7.0 5 "Math > Khan Academy [x13]")
+      (*activity 7.25 7.5 5 "Math > Khan Academy [x15]")
+      (*activity 7.5 ??? 5 "Math > Khan Academy [x20]"))
      (*activity 5.0 6.0 5 "Math > Subtraction [10x10] [written] [x10]")
      (meta-activity
-      (*activity 5.0 5.5 3 "Science > Basic reading (w/ parent) [>5w]")
-      (*activity 5.5 ??? 5 "Science > Basic reading (w/ parent) [>5w]"))
+      (*activity 5.0 5.5 3 "Science > Basic reading (w/ parent)")
+      (*activity 5.5 ??? 5 "Science > Basic reading (w/ parent)"))
      (meta-activity
-      (*activity 5.0 5.5 3 "History > Basic reading (w/ parent) [>5w]")
-      (*activity 5.5 ??? 5 "History > Basic reading (w/ parent) [>5w]"))
-     (*activity 5.0 ??? 5 "Literature > Basic reading (w/ parent) [>5w]")
-     (*activity 5.0 ??? 5 "Composition > Sentences [written] [>5w]")
-     (*activity 5.5 ??? 5 "Math > Addition [10x10] [memory] [x10]")
-     (*activity 5.5 ??? 5 "Math > Counting [x5]")
-     (*activity 6.0 ??? 5 "Writing > Words [spelled] [x10]")
-     (*activity 6.0 ??? 5 "Math > Subtraction [10x10] [memory] [x5]")
-     (*activity 6.0 ??? 5 "Math > Multi-Digit Addition [x5]")
-     (*activity 6.0 ??? 6 "Piano")
-     (*activity 6.0 ??? 5 "Computer > Typing")
-     (*activity 6.5 ??? 5 "Math > Multiplication [10x10] [written] [x10]")))))
+      (*activity 5.0 5.5 3 "History > Basic reading (w/ parent)")
+      (*activity 5.5 ??? 5 "History > Basic reading (w/ parent)"))
+     (*activity 5.0 ??? 5 "Literature > Basic reading (w/ parent)")
+     (meta-activity
+      (*activity 5.0 6.0 5 "Composition > Copy-work / Journal [>10w]")
+      (*activity 6.0 ??? 5 "Composition > Copy-work / Journal [>20w]"))
+     (*activity 5.5 6.5 5 "Math > Addition [10x10] [memory] [x10]")
+     (meta-activity
+      (*activity 6.0 6.5 5 "Writing > Words [o/w] [x10]")
+      (*activity 6.5 ??? 5 "Writing > Words [o/w] [x20]"))
+     (meta-activity
+      (*activity 6.0 6.5 5 "Math > Subtraction [10x10] [memory] [x5]")
+      (*activity 6.5 ??? 5 "Math > Subtraction [10x10] [memory] [x10]"))
+     (meta-activity
+      (*activity 6.0 6.5 5 "Math > Multi-Digit Addition [x5]")
+      (*activity 6.5 6.75 5 "Math > Multi-Digit Addition [x10]")
+      (*activity 6.75 ??? 5 "Math > Multi-Digit Addition [x5]"))
+     (*activity 6.0 ??? 5 "Music")
+     (meta-activity
+      (*activity 6.5 ??? 5 "Math > Multi-Digit Subtraction [x5]"))
+     (*activity 6.75 ??? 5 "Math > Multiplication [10x10] [written] [x10]")
+     (*activity 7.0 ??? 5 "Division")))))
