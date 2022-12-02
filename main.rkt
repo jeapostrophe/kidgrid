@@ -153,10 +153,10 @@
           8.0))
   (define u:peach
     (user "Peach"
-          6.5))
+          7.0))
   (define u:hazel
     (user "Hazel"
-          4.0))
+          4.5))
 
   (define ??? 18.0)
   (go
